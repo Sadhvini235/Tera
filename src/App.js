@@ -1,6 +1,25 @@
 import React, { useState } from "react";
 import "./App.css";
 
+const brands = [
+  { name: "No Nasties", website: "https://www.nonasties.in/" },
+  { name: "Nicobar", website: "https://www.nicobar.com/" },
+  { name: "Doodlage", website: "https://doodlage.in/" },
+  { name: "The Summer House", website: "https://thesummerhouse.in/" },
+  { name: "Renge", website: "https://www.renge.co.in/" },
+  { name: "Okhai", website: "https://www.okhai.org/" },
+  { name: "Maati by Neha Kabra", website: "https://maati.in/" },
+  { name: "B Label", website: "https://blabel.in/" },
+  { name: "Jodi Life", website: "https://thejodilife.com/" },
+  { name: "PAIO", website: "https://www.paio.co.in/" },
+  { name: "Zouk", website: "https://zouk.co.in/" },
+  { name: "Mistry", website: "https://mistry.in/" },
+  { name: "Arture", website: "https://arture.in/" },
+  { name: "Monkstory", website: "https://monkstory.com/" },
+  { name: "Amala Earth", website: "https://amala.earth/" },
+  { name: "Outhouse", website: "https://outhouse-jewellery.com/" },
+];
+
 const SustainableFashionGuide = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -29,29 +48,32 @@ const SustainableFashionGuide = () => {
 
   const handleContactSubmit = (e) => {
     e.preventDefault();
-    alert(`Thank you for reaching out, ${contactInfo.name}!`);
+    alert(Thank you for reaching out, ${contactInfo.name}!);
     setContactInfo({ name: "", email: "", message: "" });
   };
 
   const handleRecycleClick = () => {
-    setRecycleFormOpen(true); // Show the form when Recycle is clicked
-    setShowRecycleOptions(false); // Hide the Recycle options
+    setRecycleFormOpen(true);
+    setShowRecycleOptions(false);
+  };
+
+  const handleShopClick = () => {
+    setActiveSection("shop");
   };
 
   return (
     <div className="container background-container">
       {/* Navbar */}
       <nav className="navbar">
-        <div className="nav-links">
+        <div className="nav-left">
+          <img src="/my_logo.png" alt="Logo" className="logo-img" />
+          <h1 className="logo-text">TERRA</h1>
+        </div>
+        <div className="nav-right">
           <a href="#" onClick={() => handleMenuClick("home")}>Home</a>
           <a href="#" onClick={() => handleMenuClick("about")}>About</a>
-          <a href="#" onClick={() => handleMenuClick("tips")}>Tips & Guide</a>
-          <a href="#" onClick={() => handleMenuClick("brands")}>Sustainable Brands</a>
-        </div>
-
-        <div className="nav-right">
           <span className="icon">🤍</span>
-          <button className="login-btn">Login</button>
+          <button className="login-btn">Login In</button>
         </div>
       </nav>
 
@@ -70,7 +92,7 @@ const SustainableFashionGuide = () => {
                 <p>Learn how to recycle and upcycle old clothes and fabrics.</p>
               </div>
 
-              <div className="card" onClick={() => alert("You clicked Purchase!")}>
+              <div className="card" onClick={handleShopClick}>
                 <h2>🛍 Shop</h2>
                 <p>Buy eco-friendly and sustainable fashion items.</p>
               </div>
@@ -81,7 +103,6 @@ const SustainableFashionGuide = () => {
               </div>
             </section>
 
-            {/* Show Recycle or Upcycle Options below Cards */}
             {showRecycleOptions && (
               <div className="options-popup">
                 <h3>Select an Option:</h3>
@@ -90,7 +111,6 @@ const SustainableFashionGuide = () => {
               </div>
             )}
 
-            {/* Recycle Form */}
             {recycleFormOpen && (
               <form className="recycle-form" onSubmit={(e) => {
                 e.preventDefault();
@@ -135,16 +155,31 @@ const SustainableFashionGuide = () => {
               </form>
             )}
 
-            {/* Text Section that appears after scrolling */}
-            <section className="sustainability-text-section">
-              <h2>Your One Stop Ground for Sustainability</h2>
-              <p>
-                We are dedicated to helping you make sustainable fashion choices that benefit both the planet and people.
-                Join the movement towards a more eco-friendly wardrobe.
-              </p>
+            <section className="big-card-section">
+              <div className="big-card">
+                <h2>We are <span className="highlight">not (just)</span> a fashion guide.</h2>
+                <p>Fashion harms the planet. <span className="highlight-small">Not us. We heal it.</span></p>
+              </div>
             </section>
 
-            {/* Footer Contact Section */}
+            <section className="badge-section">
+              <h2>🏆 Achieve Your Badges!</h2>
+              <div className="badge-container">
+                <div className="badge-card">
+                  <h3>🌱 Green Shopper</h3>
+                  <p>Awarded when you purchase eco-friendly fashion for the first time.</p>
+                </div>
+                <div className="badge-card">
+                  <h3>♻ Upcycle Master</h3>
+                  <p>Given for successfully upcycling and sharing creative projects.</p>
+                </div>
+                <div className="badge-card">
+                  <h3>🛒 Thrift Savvy</h3>
+                  <p>Earned when you make your first thrift or second-hand purchase.</p>
+                </div>
+              </div>
+            </section>
+
             <section className="contact-section">
               <div className="contact-column">
                 <h2>About Us</h2>
@@ -180,6 +215,20 @@ const SustainableFashionGuide = () => {
                 </a>
               </div>
             </section>
+          </div>
+        )}
+
+        {/* Shop Section */}
+        {activeSection === "shop" && (
+          <div className="shop-page">
+            <h1>🌱 Sustainable Brands</h1>
+            <div className="brand-card-container">
+              {brands.map((brand, index) => (
+                <div key={index} className="brand-card" onClick={() => window.open(brand.website, "_blank")}>
+                  <h3>{brand.name}</h3>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
