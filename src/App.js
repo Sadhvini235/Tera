@@ -70,7 +70,7 @@ const SustainableFashionGuide = () => {
           <h1 className="logo-text">TERRA</h1>
         </div>
         <div className="nav-right">
-          <a href="#" onClick={() => handleMenuClick("home")}>Home</a>
+          <a href="/" onClick={() => handleMenuClick("home")}>Home</a>
           <a href="#" onClick={() => handleMenuClick("about")}>About</a>
           <span className="icon">🤍</span>
           <button className="login-btn">Login In</button>
